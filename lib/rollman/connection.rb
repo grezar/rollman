@@ -16,7 +16,9 @@ module Rollman
     def agent
       Faraday.new(endpoint) do |http|
         http.request :url_encoded
-        http.response :logger
+        http.response :logger do |logger|
+          logger.filter(/(access_token=)(\w+)/,'\1[REMOVED]')
+        end
         http.adapter Faraday.default_adapter
       end
     end
