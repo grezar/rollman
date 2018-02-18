@@ -29,7 +29,7 @@ module Rollman
     private
 
     def request(method, path, options = {})
-      options.store(:access_token, @access_token)
+      options.merge!({access_token: @access_token})
 
       response = agent.__send__(method, path, options)
       response.body
