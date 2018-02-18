@@ -1,4 +1,5 @@
 require 'faraday'
+require 'json'
 
 module Rollman
   module Connection
@@ -32,7 +33,7 @@ module Rollman
       options.merge!({access_token: @access_token})
 
       response = agent.__send__(method, path, options)
-      response.body
+      JSON.parse(response.body)
     end
   end
 end
